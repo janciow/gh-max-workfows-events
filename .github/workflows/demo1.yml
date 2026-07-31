@@ -3,10 +3,6 @@ on:
   pull_request:
     types: [opened, edited]
   workflow_dispatch:
-    inputs:
-      demo1:
-        description: 'Demo 1 input'
-        required: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
