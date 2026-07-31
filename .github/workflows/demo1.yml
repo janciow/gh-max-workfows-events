@@ -2,11 +2,11 @@ name: Events Demo 1
 on: 
   pull_request:
     types: [opened, edited]
+    paths: ["src/**", ".github/workflows/demo1.yml"]
     branches: [main, "feature/*"]
   workflow_dispatch:
   push:
     branches: [main, "feature/*"]
-    paths: ["src/**", ".github/workflows/demo1.yml"]
     paths-ignore: ["src/components/HelpBox.jsx"]
 jobs:
   deploy:
