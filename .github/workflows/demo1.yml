@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v6.1.0
       - name: Step 3
         run: |
-          `pwd` >> myArti.txt
+          echo "pwd" >> myArti.txt
           ls -ltr
           hostname
       - name: Upload
