@@ -45,7 +45,7 @@ jobs:
           pwd
           ls -ltr
       - name: download
-        uses: actions/download-artifact@5
+        uses: actions/download-artifact@v5
         with:
           name: single_file
       - name: cheking curent directory
