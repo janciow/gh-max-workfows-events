@@ -57,6 +57,34 @@ jobs:
         run: |
           pwd
           ls -ltr
+  job3:
+    name: JOB3
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: creatin directory
+        run: |
+          mkdir -p singlr_filr
+          mkdir -p downoad_directory
+      - name: cheking curent directory
+        run: |
+          pwd
+          ls -ltr
+      - name: download
+        uses: actions/download-artifact@v5
+        with:
+          name: single_file
+          path: singlr_filr
+      - name: download dir
+        uses: actions/download-artifact@v5
+        with:
+          name: directory_arti
+          path: downoad_directory
+      - name: cheking curent directory
+        run: |
+          pwd
+          ls -ltr single_file
+          ls -ltr downoad_directory
           
         
       
