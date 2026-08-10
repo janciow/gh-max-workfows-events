@@ -83,7 +83,7 @@ jobs:
       - name: cheking curent directory
         run: |
           pwd
-          ls -ltr single_file
+          ls -ltr singlr_filr
           ls -ltr downoad_directory
           
         
