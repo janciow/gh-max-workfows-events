@@ -38,6 +38,7 @@ jobs:
             ./myArti.txt
   job2:
     name: JOB2
+    needs: job1
     runs-on: ubuntu-latest
     steps:
       - name: cheking curent directory
