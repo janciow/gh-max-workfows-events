@@ -49,6 +49,10 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: single_file
+      - name: download dir
+        uses: actions/download-artifact@v5
+        with:
+          name: directory_arti
       - name: cheking curent directory
         run: |
           pwd
