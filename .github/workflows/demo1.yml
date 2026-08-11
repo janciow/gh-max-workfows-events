@@ -1,26 +1,87 @@
 name: Events Demo 1
 on: 
-  pull_request:
-    types: [opened, edited]
-    paths: ["src/**", ".github/workflows/demo1.yml"]
-    branches: [main, "feature/*"]
-  workflow_dispatch:
-  push:
-    branches: [main, "feature/*"]
-    paths-ignore: ["src/components/HelpBox.jsx"]
+  push: 
 jobs:
-  deploy:
+  job1:
+    name: JOB1
     runs-on: ubuntu-latest
     steps:
-      - name: Output event data
-        run: echo "${{ toJSON(github.event) }}"
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Test code
-        run: npm run test
-      - name: Build code
-        run: npm run build
-      - name: Deploy project
-        run: echo "Deploying..."
+      - name: step 1
+        run: |
+          pwd
+          ls -ltr
+          hostname
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Step 3
+        run: |
+          pwd >> myArti.txt
+          mkdir artifold 
+          echo `ls -ltr` >>  artifold/hostname.txt
+          echo  `hostname` >> artifold/hostname.txt
+      - name: Upload
+        uses: actions/upload-artifact@v5
+        with:
+          name: single_file
+          path: ./myArti.txt
+      - name: upload from directory
+        uses: actions/upload-artifact@v5
+        with:
+          name: directory_arti
+          path: artifold/
+      - name: multiple path
+        uses: actions/upload-artifact@v5
+        with:
+          name: directory_multi
+          path: |
+            artifold/
+            ./myArti.txt
+  job2:
+    name: JOB2
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: cheking curent directory
+        run: |
+          pwd
+          ls -ltr
+      - name: download
+        uses: actions/download-artifact@v5
+        with:
+          name: single_file
+      - name: download dir
+        uses: actions/download-artifact@v5
+        with:
+          name: directory_arti
+      - name: cheking curent directory
+        run: |
+          pwd
+          ls -ltr
+  job3:
+    name: JOB3
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: creatin directory
+        run: |
+          mkdir -p singlr_filr
+          mkdir -p downoad_directory
+      - name: cheking curent directory
+        run: |
+          pwd
+          ls -ltr
+      - name: download
+        uses: actions/download-artifact@v5
+        with:
+          name: single_file
+          path: singlr_filr
+      - name: download dir
+        uses: actions/download-artifact@v5
+        with:
+          name: directory_arti
+          path: downoad_directory
+      - name: cheking curent directory
+        run: |
+          pwd
+          ls -ltr singlr_filr
+          ls -ltr downoad_directory
